@@ -4,6 +4,7 @@ import com.bookmanagement.BookManagement.dto.BookDto;
 import com.bookmanagement.BookManagement.entity.Book;
 import com.bookmanagement.BookManagement.mapper.BookMapper;
 import com.bookmanagement.BookManagement.repository.BookRepository;
+import com.bookmanagement.BookManagement.service.AuthorService;
 import com.bookmanagement.BookManagement.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,13 +12,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service("bookService")
-public class BookServiceImpl implements BookService {
+@Service("bookServiceSecond")
+public class BookServiceSecondImpl implements BookService {
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
 
     @Autowired
-    public BookServiceImpl(BookRepository bookRepository, BookMapper bookMapper) {
+    public BookServiceSecondImpl(BookRepository bookRepository, BookMapper bookMapper) {
         this.bookRepository = bookRepository;
         this.bookMapper = bookMapper;
     }

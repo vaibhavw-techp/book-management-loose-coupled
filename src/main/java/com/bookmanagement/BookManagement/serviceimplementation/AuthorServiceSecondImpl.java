@@ -14,15 +14,15 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service("authorService")
-public class AuthorServiceImpl implements AuthorService {
+@Service("secondAuthorService")
+public class AuthorServiceSecondImpl implements AuthorService {
     private final AuthorRepository authorRepository;
     private final AuthorMapper authorMapper;
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
 
     @Autowired
-    public AuthorServiceImpl(AuthorRepository authorRepository, AuthorMapper authorMapper,
+    public AuthorServiceSecondImpl(AuthorRepository authorRepository, AuthorMapper authorMapper,
                              BookRepository bookRepository, BookMapper bookMapper) {
         this.authorRepository = authorRepository;
         this.authorMapper = authorMapper;
@@ -52,4 +52,5 @@ public class AuthorServiceImpl implements AuthorService {
                 .map(bookMapper::toDTO)
                 .collect(Collectors.toList());
     }
+
 }
