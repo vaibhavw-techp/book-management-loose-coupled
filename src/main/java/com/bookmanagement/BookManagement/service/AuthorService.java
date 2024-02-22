@@ -9,7 +9,6 @@ import java.util.List;
 public interface AuthorService {
     List<AuthorDto> getAllAuthors();
 
-    List<BookDto> getBooksByAuthorId(Long authorId);
-
     AuthorDto createAuthorBook(AuthorDto authorDto);
+    List<BookDto> getBooksByAuthorId(Long authorId);
 }
