@@ -1,0 +1,54 @@
+package com.bookmanagement.BookManagement.serviceimplementation;
+
+import com.bookmanagement.BookManagement.dto.AuthorDto;
+import com.bookmanagement.BookManagement.dto.BookDto;
+import com.bookmanagement.BookManagement.entity.Author;
+import com.bookmanagement.BookManagement.mapper.AuthorMapper;
+import com.bookmanagement.BookManagement.mapper.BookMapper;
+import com.bookmanagement.BookManagement.repository.AuthorRepository;
+import com.bookmanagement.BookManagement.repository.BookRepository;
+import com.bookmanagement.BookManagement.service.AuthorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class AuthorServiceImpl implements AuthorService {
+    private final AuthorRepository authorRepository;
+    private final AuthorMapper authorMapper;
+    private final BookRepository bookRepository;
+    private final BookMapper bookMapper;
+
+    @Autowired
+    public AuthorServiceImpl(AuthorRepository authorRepository, AuthorMapper authorMapper,
+                             BookRepository bookRepository, BookMapper bookMapper) {
+        this.authorRepository = authorRepository;
+        this.authorMapper = authorMapper;
+        this.bookRepository = bookRepository;
+        this.bookMapper = bookMapper;
+    }
+
+    @Override
+    public List<AuthorDto> getAllAuthors() {
+        return authorRepository.findAll().stream()
+                .map(authorMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BookDto> getBooksByAuthorId(Long authorId) {
+        return bookRepository.findByAuthorId(authorId).stream()
+                .map(bookMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public AuthorDto createAuthorBook(AuthorDto authorDto){
+        Author author = new Author();
+        authorMapper.updateAuthor(authorDto,author);
+        authorRepository.save(author);
+        return authorMapper.toDTO(author);
+    }
+}
