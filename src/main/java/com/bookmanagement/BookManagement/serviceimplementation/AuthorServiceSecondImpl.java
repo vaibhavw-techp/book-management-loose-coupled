@@ -52,5 +52,9 @@ public class AuthorServiceSecondImpl implements AuthorService {
                 .map(bookMapper::toDTO)
                 .collect(Collectors.toList());
     }
+    @Override
+    public void show(){
+        System.out.println("In Second Author Service");
+    }
 
 }

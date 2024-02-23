@@ -28,5 +28,8 @@ public class BookServiceSecondImpl implements BookService {
         List<Book> temp = bookRepository.findAll();
         return temp.stream().map(bookMapper::toDTO).collect(Collectors.toList());
     }
-
+    @Override
+    public void show(){
+        System.out.println("In Second Book Service");
+    }
 }
