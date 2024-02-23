@@ -53,4 +53,9 @@ public class AuthorServiceSecondImpl implements AuthorService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void show(){
+        System.out.println("In Second Author Service");
+    }
+
 }

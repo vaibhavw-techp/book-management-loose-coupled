@@ -11,4 +11,6 @@ public interface AuthorService {
 
     AuthorDto createAuthorBook(AuthorDto authorDto);
     List<BookDto> getBooksByAuthorId(Long authorId);
+
+    void show();
 }

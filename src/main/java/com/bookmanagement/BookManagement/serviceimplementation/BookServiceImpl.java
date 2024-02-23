@@ -28,4 +28,9 @@ public class BookServiceImpl implements BookService {
         return temp.stream().map(bookMapper::toDTO).collect(Collectors.toList());
     }
 
+    @Override
+    public void show(){
+        System.out.println("In First Book Service");
+    }
+
 }
