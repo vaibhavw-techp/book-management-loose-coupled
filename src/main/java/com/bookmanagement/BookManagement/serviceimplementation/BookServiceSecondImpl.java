@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service("bookServiceSecond")
+@Service("secondBookService")
 public class BookServiceSecondImpl implements BookService {
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;

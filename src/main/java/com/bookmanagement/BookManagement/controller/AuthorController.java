@@ -7,6 +7,7 @@ import com.bookmanagement.BookManagement.repository.AuthorRepository;
 import com.bookmanagement.BookManagement.repository.BookRepository;
 import com.bookmanagement.BookManagement.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,12 +25,13 @@ public class AuthorController {
 
 
     @Autowired
-    public AuthorController(AuthorService authorService) {
+    public AuthorController(@Qualifier("secondAuthorService") AuthorService authorService) {
         this.authorService = authorService;
     }
 
     @GetMapping
     public ResponseEntity<List<AuthorDto>> getAllAuthors() {
+        authorService.show();
         return ResponseEntity.ok(authorService.getAllAuthors());
     }
 
