@@ -1,6 +1,7 @@
 package com.bookmanagement.BookManagement.serviceimplementation;
 
 import com.bookmanagement.BookManagement.dto.BookDto;
+import com.bookmanagement.BookManagement.entity.AuthorEntity;
 import com.bookmanagement.BookManagement.entity.BookEntity;
 import com.bookmanagement.BookManagement.mapper.BookMapper;
 import com.bookmanagement.BookManagement.repository.BookRepository;
@@ -27,7 +28,19 @@ public class BookServiceImpl implements BookService {
         List<BookEntity> temp = bookRepository.findAll();
         return temp.stream().map(bookMapper::toDTO).collect(Collectors.toList());
     }
+    @Override
+    public void assignAuthorToBooks(AuthorEntity author, List<Long> bookIds) {
+        List<BookEntity> books = bookRepository.findAllById(bookIds);
+        if (books.size() != bookIds.size()) {
+            throw new IllegalArgumentException("One or more book IDs are invalid");
+        }
 
+        for (BookEntity book : books) {
+            book.setAuthor(author);
+        }
+
+        bookRepository.saveAll(books);
+    }
 
     @Override
     public void show(){

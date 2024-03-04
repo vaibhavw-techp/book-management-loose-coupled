@@ -1,7 +1,6 @@
 package com.bookmanagement.BookManagement.service;
 
 import com.bookmanagement.BookManagement.dto.AuthorDto;
-import com.bookmanagement.BookManagement.dto.BookDto;
 
 import java.util.List;
 
@@ -9,7 +8,9 @@ import java.util.List;
 public interface AuthorService {
     List<AuthorDto> getAllAuthors();
 
-    AuthorDto createAuthorBook(AuthorDto authorDto);
+    AuthorDto addAuthor(AuthorDto authorDto);
+
+    void assignAuthorToBooks(Long authorId, List<Long> bookIds);
 
     void show();
 }

@@ -1,13 +1,12 @@
 package com.bookmanagement.BookManagement.serviceimplementation;
 
 import com.bookmanagement.BookManagement.dto.AuthorDto;
-import com.bookmanagement.BookManagement.dto.BookDto;
 import com.bookmanagement.BookManagement.entity.AuthorEntity;
+import com.bookmanagement.BookManagement.entity.BookEntity;
 import com.bookmanagement.BookManagement.mapper.AuthorMapper;
-import com.bookmanagement.BookManagement.mapper.BookMapper;
 import com.bookmanagement.BookManagement.repository.AuthorRepository;
-import com.bookmanagement.BookManagement.repository.BookRepository;
 import com.bookmanagement.BookManagement.service.AuthorService;
+import com.bookmanagement.BookManagement.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,18 +15,15 @@ import java.util.stream.Collectors;
 
 @Service("secondAuthorService")
 public class AuthorServiceSecondImpl implements AuthorService {
-    private final AuthorRepository authorRepository;
-    private final AuthorMapper authorMapper;
-    private final BookRepository bookRepository;
-    private final BookMapper bookMapper;
+    private AuthorRepository authorRepository;
+    private AuthorMapper authorMapper;
+
+    private BookService bookService;
 
     @Autowired
-    public AuthorServiceSecondImpl(AuthorRepository authorRepository, AuthorMapper authorMapper,
-                             BookRepository bookRepository, BookMapper bookMapper) {
+    public AuthorServiceSecondImpl(AuthorRepository authorRepository, AuthorMapper authorMapper) {
         this.authorRepository = authorRepository;
         this.authorMapper = authorMapper;
-        this.bookRepository = bookRepository;
-        this.bookMapper = bookMapper;
     }
 
     @Override
@@ -37,13 +33,19 @@ public class AuthorServiceSecondImpl implements AuthorService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public AuthorDto addAuthor(AuthorDto authorDto) {
+        AuthorEntity authorEntity = authorMapper.toEntity(authorDto);
+        AuthorEntity savedAuthorEntity = authorRepository.save(authorEntity);
+        return authorMapper.toDTO(savedAuthorEntity);
+    }
 
     @Override
-    public AuthorDto createAuthorBook(AuthorDto authorDto){
-        AuthorEntity author = new AuthorEntity();
-        authorMapper.updateAuthor(authorDto,author);
-        authorRepository.save(author);
-        return authorMapper.toDTO(author);
+    public void assignAuthorToBooks(Long authorId, List<Long> bookIds) {
+        AuthorEntity author = authorRepository.findById(authorId)
+                .orElseThrow(() -> new IllegalArgumentException("Author not found with ID: " + authorId));
+
+        bookService.assignAuthorToBooks(author, bookIds);
     }
 
     @Override

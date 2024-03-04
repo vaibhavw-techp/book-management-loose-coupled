@@ -11,5 +11,4 @@ import java.util.List;
 @NoArgsConstructor
 public class AuthorDto {
     private String name;
-    private List<BookDto> books;
 }

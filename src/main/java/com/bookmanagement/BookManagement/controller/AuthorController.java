@@ -1,10 +1,6 @@
 package com.bookmanagement.BookManagement.controller;
 
 import com.bookmanagement.BookManagement.dto.AuthorDto;
-import com.bookmanagement.BookManagement.dto.BookDto;
-import com.bookmanagement.BookManagement.mapper.AuthorMapper;
-import com.bookmanagement.BookManagement.repository.AuthorRepository;
-import com.bookmanagement.BookManagement.repository.BookRepository;
 import com.bookmanagement.BookManagement.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -30,12 +26,19 @@ public class AuthorController {
         return ResponseEntity.ok(authorService.getAllAuthors());
     }
 
-    // To create Author and Books
-    @PostMapping("/books")
-    public ResponseEntity<AuthorDto> createAuthorBook(@RequestBody AuthorDto authorDto)
+    @PostMapping()
+    public ResponseEntity<AuthorDto> addAuthor(@RequestBody AuthorDto authorDto)
     {
-        return ResponseEntity.ok(authorService.createAuthorBook(authorDto));
-
+        return ResponseEntity.ok(authorService.addAuthor(authorDto));
     }
 
+    @PutMapping("/{authorId}/books")
+    public ResponseEntity<String> assignBooksToAuthor(@PathVariable Long authorId, @RequestBody List<Long> bookIds) {
+        try {
+            authorService.assignAuthorToBooks(authorId, bookIds);
+            return ResponseEntity.ok("Books assigned to author successfully.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
