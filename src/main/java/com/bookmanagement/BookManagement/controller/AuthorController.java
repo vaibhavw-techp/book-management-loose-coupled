@@ -18,11 +18,6 @@ import java.util.List;
 public class AuthorController {
 
     private AuthorService authorService;
-    private AuthorRepository authorRepository;
-
-    private BookRepository bookRepository;
-    private AuthorMapper authorMapper;
-
 
     @Autowired
     public AuthorController(@Qualifier("secondAuthorService") AuthorService authorService) {
