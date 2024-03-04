@@ -3,23 +3,22 @@ package com.bookmanagement.BookManagement.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class Book {
+@NoArgsConstructor
+public class AuthorEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NonNull
     private Long id;
 
-    private String title;
+    private String name;
 
-    private double price;
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    private List<BookEntity> books;
 
-    private String publication;
-
-    @ManyToOne
-    private Author author;
 }

@@ -2,7 +2,7 @@ package com.bookmanagement.BookManagement.serviceimplementation;
 
 import com.bookmanagement.BookManagement.dto.AuthorDto;
 import com.bookmanagement.BookManagement.dto.BookDto;
-import com.bookmanagement.BookManagement.entity.Author;
+import com.bookmanagement.BookManagement.entity.AuthorEntity;
 import com.bookmanagement.BookManagement.mapper.AuthorMapper;
 import com.bookmanagement.BookManagement.mapper.BookMapper;
 import com.bookmanagement.BookManagement.repository.AuthorRepository;
@@ -40,7 +40,7 @@ public class AuthorServiceSecondImpl implements AuthorService {
 
     @Override
     public AuthorDto createAuthorBook(AuthorDto authorDto){
-        Author author = new Author();
+        AuthorEntity author = new AuthorEntity();
         authorMapper.updateAuthor(authorDto,author);
         authorRepository.save(author);
         return authorMapper.toDTO(author);

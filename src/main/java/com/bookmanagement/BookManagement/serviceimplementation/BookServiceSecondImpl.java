@@ -1,7 +1,7 @@
 package com.bookmanagement.BookManagement.serviceimplementation;
 
 import com.bookmanagement.BookManagement.dto.BookDto;
-import com.bookmanagement.BookManagement.entity.Book;
+import com.bookmanagement.BookManagement.entity.BookEntity;
 import com.bookmanagement.BookManagement.mapper.BookMapper;
 import com.bookmanagement.BookManagement.repository.BookRepository;
 import com.bookmanagement.BookManagement.service.AuthorService;
@@ -25,7 +25,7 @@ public class BookServiceSecondImpl implements BookService {
 
     @Override
     public List<BookDto> getAllBooks() {
-        List<Book> temp = bookRepository.findAll();
+        List<BookEntity> temp = bookRepository.findAll();
         return temp.stream().map(bookMapper::toDTO).collect(Collectors.toList());
     }
     @Override
