@@ -43,6 +43,18 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<BookDto> addBooks(List<BookDto> bookDtos) {
+        List<BookEntity> books = bookDtos.stream()
+                .map(bookMapper::toEntity)
+                .collect(Collectors.toList());
+
+        List<BookEntity> savedBooks = bookRepository.saveAll(books);
+        return savedBooks.stream()
+                .map(bookMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public void show(){
         System.out.println("In First Book Service");
     }

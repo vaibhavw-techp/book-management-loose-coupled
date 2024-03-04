@@ -17,13 +17,13 @@ import java.util.stream.Collectors;
 public class AuthorServiceSecondImpl implements AuthorService {
     private AuthorRepository authorRepository;
     private AuthorMapper authorMapper;
-
     private BookService bookService;
 
     @Autowired
-    public AuthorServiceSecondImpl(AuthorRepository authorRepository, AuthorMapper authorMapper) {
+    public AuthorServiceSecondImpl(AuthorRepository authorRepository, AuthorMapper authorMapper, BookService bookService) {
         this.authorRepository = authorRepository;
         this.authorMapper = authorMapper;
+        this.bookService = bookService;
     }
 
     @Override
