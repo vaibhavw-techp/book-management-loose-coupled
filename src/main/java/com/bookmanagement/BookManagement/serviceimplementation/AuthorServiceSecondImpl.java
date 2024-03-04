@@ -47,12 +47,6 @@ public class AuthorServiceSecondImpl implements AuthorService {
     }
 
     @Override
-    public List<BookDto> getBooksByAuthorId(Long authorId) {
-        return bookRepository.findByAuthorId(authorId).stream()
-                .map(bookMapper::toDTO)
-                .collect(Collectors.toList());
-    }
-    @Override
     public void show(){
         System.out.println("In Second Author Service");
     }

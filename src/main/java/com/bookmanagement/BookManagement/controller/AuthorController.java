@@ -38,8 +38,4 @@ public class AuthorController {
 
     }
 
-    @GetMapping("/{authorId}/books")
-    public ResponseEntity<List<BookDto>> getBooksByAuthorId(@PathVariable Long authorId) {
-        return ResponseEntity.ok(authorService.getBooksByAuthorId(authorId));
-    }
 }

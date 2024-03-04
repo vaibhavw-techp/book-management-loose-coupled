@@ -8,6 +8,7 @@ import com.bookmanagement.BookManagement.mapper.BookMapper;
 import com.bookmanagement.BookManagement.repository.AuthorRepository;
 import com.bookmanagement.BookManagement.repository.BookRepository;
 import com.bookmanagement.BookManagement.service.AuthorService;
+import com.bookmanagement.BookManagement.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,16 +19,12 @@ import java.util.stream.Collectors;
 public class AuthorServiceImpl implements AuthorService {
     private final AuthorRepository authorRepository;
     private final AuthorMapper authorMapper;
-    private final BookRepository bookRepository;
-    private final BookMapper bookMapper;
 
     @Autowired
     public AuthorServiceImpl(AuthorRepository authorRepository, AuthorMapper authorMapper,
                              BookRepository bookRepository, BookMapper bookMapper) {
         this.authorRepository = authorRepository;
         this.authorMapper = authorMapper;
-        this.bookRepository = bookRepository;
-        this.bookMapper = bookMapper;
     }
 
     @Override
@@ -46,12 +43,6 @@ public class AuthorServiceImpl implements AuthorService {
         return authorMapper.toDTO(author);
     }
 
-    @Override
-    public List<BookDto> getBooksByAuthorId(Long authorId) {
-        return bookRepository.findByAuthorId(authorId).stream()
-                .map(bookMapper::toDTO)
-                .collect(Collectors.toList());
-    }
     @Override
     public void show(){
         System.out.println("In First Author Service");
