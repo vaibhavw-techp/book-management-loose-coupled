@@ -22,7 +22,7 @@ public interface BookMapper {
     BookEntity toEntity(BookDto dto);
 
 
-    List<BookEntity> getEntityList(List<BookDto> bookDtos);
+    List<BookEntity> mapDtosToEntities(List<BookDto> bookDtos);
 
 
 }
