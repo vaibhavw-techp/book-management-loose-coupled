@@ -11,7 +11,8 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "spring", uses = BookMapper.class)
 public interface AuthorMapper {
 
+    @Mapping(target = "name", source = "author.name")
     AuthorDto toDTO(AuthorEntity author);
-
+    @Mapping(target = "name", source = "authorDto.name")
     AuthorEntity toEntity(AuthorDto authorDto);
 }

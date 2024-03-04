@@ -25,8 +25,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<BookDto> getAllBooks() {
-        List<BookEntity> temp = bookRepository.findAll();
-        return temp.stream().map(bookMapper::toDTO).collect(Collectors.toList());
+        List<BookEntity> bookEntities = bookRepository.findAll();
+        return bookEntities.stream().map(bookMapper::toDTO).collect(Collectors.toList());
     }
     @Override
     public void assignAuthorToBooks(AuthorEntity author, List<Long> bookIds) {
